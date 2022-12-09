@@ -59,4 +59,3 @@ let lines = fs.readFileSync(filepath).toString().split('\n');
 var linesArr = lines.map(x => x.replace('\r', '')); // why didn't I use map in the previous ones? Because im new to js and didnt' think of it ok?
 
 console.log(linesArr);
-

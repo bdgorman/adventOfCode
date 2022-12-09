@@ -78,9 +78,6 @@ function isContained(range1, range2) {
     const endNum2 = Number(starEndPair2[1]);
 
     // console.log("startNum1", startNum1, "endNum1", endNum1);
-    return (
-        (startNum1 >= startNum2 && endNum1 <= endNum2) || 
-        (startNum1 <= startNum2 && endNum1 >= endNum2)
-        );
+    return startNum1 <= endNum2 && endNum1 >= startNum2;
 
 }

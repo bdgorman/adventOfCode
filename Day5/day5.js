@@ -1,43 +1,51 @@
 // This is me cheating a little. I didn't feel like parsing this array out from the data because the way they formatted it was super annoying and I don't have time for it today.
-test_array =[
+var startingState =[
     [
-        ["H"], ["T"], ["Z"], ["D"]
+        "H", "T", "Z", "D"
     ],
     [
-        ["Q"], ["R"], ["W"], ["T"], ["G"], ["C"], ["S"]
+        "Q", "R", "W", "T", "G", "C", "S"
     ],
     [
-        ["P"], ["B"], ["F"], ["Q"], ["N"], ["R"], ["C"], ["H"]
+        "P", "B", "F", "Q", "N", "R", "C", "H"
     ],
     [
-        ["L"], ["C"], ["N"], ["F"], ["H"], ["Z"],
+        "L", "C", "N", "F", "H", "Z",
     ],
     [
-        ["G"], ["L"], ["F"], ["Q"], ["S"]
+        "G", "L", "F", "Q", "S"
     ],
     [
-        ["V"], ["P"], ["W"], ["Z"], ["B"], ["R"], ["C"], ["S"] 
+        "V", "P", "W", "Z", "B", "R", "C", "S" 
     ],
     [
-        ["Z"], ["F"], ["J"]
+        "Z", "F", "J"
     ],
     [
-        ["D"], ["L"], ["V"], ["Z"], ["R"], ["H"], ["Q"]
+        "D", "L", "V", "Z", "R", "H", "Q"
     ],
     [
-        ["B"], ["H"], ["G"], ["N"], ["F"], ["Z"], ["L"], ["D"] 
+        "B", "H", "G", "N", "F", "Z", "L", "D" 
     ]
 
 ]
 
-// test_instructions = 
+var testStartingState =  [
+    [
+        'Z', 'N'
+    ],
+    [
+        'M', 'C', 'D'
+    ],
+    [
+        'P'
+    ]
+];
+var testInstructions = "move 1 from 2 to 1 move 3 from 1 to 3 move 2 from 2 to 1 move 1 from 1 to 2";
 
-/* 
-move 1 from 2 to 1 
-move 3 from 1 to 3 
-move 2 from 2 to 1 
-move 1 from 1 to 2
-*/
+// let tmp2 = testStartingState[1].slice(-2);
+
+// console.log(tmp2);
 
 
 const fs = require('fs');
@@ -53,8 +61,7 @@ let instructions = linesArr.join('');
 var tmp = getInstructionsString(instructions);
 // console.log(tmp);
 
-// doMove(tmp[1], test_array);
-var currentState = test_array;
+var currentState = startingState;
 for (let i = 0; i < tmp.length; i++) {
     // const element = tmp[i];
     // console.log(element);
@@ -71,7 +78,7 @@ console.log(finalString);
 
 
 
-
+//Correct answer for part 2 with test data:MCD
 
 
 function getInstructionsString(instructions){
@@ -89,12 +96,15 @@ function doMove(instruction, currentArr){
     var colIndex = instruction[1] - 1;
     var destination = instruction[2] -1;
     // console.log("Starting state: ", currentArr);
-    for (let i = 0; i < numCrates; i++) {
-        // console.log("iteration", i, "currentArr: ", currentArr);
-        var crateOnTheMove = currentArr[colIndex].pop();
-        currentArr[destination].push(crateOnTheMove);
-    }
-    
+    // for (let i = 0; i < numCrates; i++) {
+    //     // console.log("iteration", i, "currentArr: ", currentArr);
+    //     var crateOnTheMove = currentArr[colIndex].pop();
+    //     currentArr[destination].push(crateOnTheMove);
+    // }
+    let tmp2 = currentArr[colIndex].splice(currentArr[colIndex].length -numCrates, numCrates);
+    tmp2.forEach(e => {
+        currentArr[destination].push(e);
+    }) 
 
     // console.log("numCrates:", numCrates, "colIndex:", colIndex,  "destination:", destination);
     // console.log("final state: ", currentArr);

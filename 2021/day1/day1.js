@@ -40,12 +40,34 @@ const path = require('path');
 let filepath = path.normalize("C:/Users/Ben/Documents/Projects/adventOfCode/2021/Day1/input.txt");
 let lines = fs.readFileSync(filepath).toString().split('\n');
 var linesArr = lines.map(x => x.replace('\r', ''));
+// var part1  = part1Func(linesArr);
+// console.log(part1);
 
-var num  = 0;
-linesArr.forEach((e, i) => {
-    if ((i != 0) && (e - linesArr[i -1] >  0)){
-        // console.log(e, linesArr[i-1]);
-        num += 1;
+// console.log(part2);
+
+function part1Func(linesArr){
+    var num  = 0;
+    linesArr.forEach((e, i) => {
+        if ((i != 0) && (e - linesArr[i -1] >  0)){
+            // console.log(e, linesArr[i-1]);
+            num += 1;
+        }
+    });
+    return num;
+}
+
+function part2Func(linesArr){
+    var returnNum = -1;
+    let prevSum = 0;
+    for (let i = 2; i < linesArr.length; i += 1) {
+        var currSum = parseInt(linesArr[i-2]) + parseInt(linesArr[i-1]) + parseInt(linesArr[i]);
+        if(currSum > prevSum) returnNum +=1;
+        prevSum = currSum;
+        console.log(returnNum);
+        // console.log(prevSum, currSum);
     }
-});
-console.log(num);
+    return returnNum;
+
+}
+
+part2Func(linesArr);
